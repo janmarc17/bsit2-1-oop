@@ -36,12 +36,12 @@ public class Library {
         }
     }
     
-    public static void main(String[] args) {
-        Book book1 = new Book("1984", "George Orwell", 328);
-        Book book2 = new Book("To Kill a Mockingbird", "Harper Lee", 281);
-        Book book3 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 180);
-
-        System.out.println("\nBook Information:");
+        public static void main(String[] args) {
+        Book book1 = new Book("Echoes of the Forgotten", "Lina Mercado", 412);
+        Book book2 = new Book("The Last Moonkeeper", "Arden Reyes", 379);
+        Book book3 = new Book("Whispers Beyond Time", "Jules Navarro", 295);
+        
+        System.out.println("Book Information:");
         book1.displayInfo();
         book2.displayInfo();
         book3.displayInfo();

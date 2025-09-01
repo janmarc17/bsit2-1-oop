@@ -13,11 +13,13 @@ public class LibraryManager {
         scanner = new Scanner(System.in);
     }
 
+    // Show books
     public void showBooks() {
         try {
             if (books == null) {
-                throw new IllegalStateException("Book list is not initialized!");
+                throw new IllegalStateException("Book list is not initialized.");
             }
+
             System.out.println("\n--- Current Books ---");
             if (books.isEmpty()) {
                 System.out.println("No books available in the library.");
@@ -33,14 +35,16 @@ public class LibraryManager {
         }
     }
 
+    // Add book
     public void addBook() {
         try {
             System.out.print("\nEnter book title to add: ");
-            String title = scanner.nextLine().trim();
+            String title = scanner.nextLine();
 
-            if (title == null || title.isEmpty()) {
+            if (title == null || title.trim().isEmpty()) {
                 throw new IllegalArgumentException("Book title cannot be empty!");
             }
+            title = title.trim();
             if (title.length() < 3) {
                 throw new IllegalArgumentException("Book title must be at least 3 characters long!");
             }
@@ -55,6 +59,7 @@ public class LibraryManager {
         }
     }
 
+    // Remove book
     public void removeBook() {
         try {
             if (books.isEmpty()) {
@@ -67,7 +72,7 @@ public class LibraryManager {
 
             int index;
             try {
-                index = Integer.parseInt(input) - 1;
+                index = Integer.parseInt(input) - 1; 
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("Please enter a valid number!");
             }
@@ -76,7 +81,7 @@ public class LibraryManager {
                 throw new IllegalArgumentException("Book number cannot be negative!");
             }
             if (index >= books.size()) {
-                throw new ArrayIndexOutOfBoundsException("Invalid book number! Please enter between 1 and " + books.size() + ".");
+                throw new ArrayIndexOutOfBoundsException();
             }
 
             String removedBook = books.remove(index);
@@ -84,7 +89,7 @@ public class LibraryManager {
         } catch (NumberFormatException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error: Invalid book number! Please enter between 1 and " + books.size() + ".");
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         } finally {

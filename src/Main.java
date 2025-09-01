@@ -1,6 +1,11 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Main branch!");
+        LibraryManager manager = new LibraryManager();
 
+        manager.showBooks();     // Display initial books
+        manager.addBook();       // Add a book with validation
+        manager.removeBook();    // Remove a book with validation
+
+        System.out.println("\nProgram completed successfully.");
     }
 }

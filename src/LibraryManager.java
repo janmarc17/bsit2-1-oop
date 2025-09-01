@@ -10,10 +10,11 @@ public class LibraryManager {
         books.add("Java Programming");
         books.add("Web Development");
         books.add("Database Design");
+
         scanner = new Scanner(System.in);
     }
 
-    // Show books
+    // method to display all books
     public void showBooks() {
         try {
             if (books == null) {
@@ -35,7 +36,7 @@ public class LibraryManager {
         }
     }
 
-    // Add book
+    // method to add a book
     public void addBook() {
         try {
             System.out.print("\nEnter book title to add: ");
@@ -44,13 +45,12 @@ public class LibraryManager {
             if (title == null || title.trim().isEmpty()) {
                 throw new IllegalArgumentException("Book title cannot be empty!");
             }
-            title = title.trim();
-            if (title.length() < 3) {
+            if (title.trim().length() < 3) {
                 throw new IllegalArgumentException("Book title must be at least 3 characters long!");
             }
 
-            books.add(title);
-            System.out.println("Book '" + title + "' added successfully!");
+            books.add(title.trim());
+            System.out.println("Book '" + title.trim() + "' added successfully!");
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
@@ -59,7 +59,7 @@ public class LibraryManager {
         }
     }
 
-    // Remove book
+    // method to remove a book
     public void removeBook() {
         try {
             if (books.isEmpty()) {
@@ -68,11 +68,11 @@ public class LibraryManager {
             }
 
             System.out.print("\nEnter book number to remove (1-" + books.size() + "): ");
-            String input = scanner.nextLine().trim();
+            String input = scanner.nextLine();
 
             int index;
             try {
-                index = Integer.parseInt(input) - 1; 
+                index = Integer.parseInt(input) - 1;
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("Please enter a valid number!");
             }

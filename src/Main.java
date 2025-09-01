@@ -2,15 +2,15 @@ public class Main {
     public static void main(String[] args) {
         LibraryManager libraryManager = new LibraryManager();
 
-        // Display initial books
+        // show initial books
         libraryManager.showBooks();
 
-        // Add books
+        // test adding books
         libraryManager.addBook();
         libraryManager.addBook();
         libraryManager.addBook();
 
-        // Remove books
+        // test removing books
         libraryManager.removeBook();
         libraryManager.removeBook();
         libraryManager.removeBook();

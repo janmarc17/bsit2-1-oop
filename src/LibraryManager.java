@@ -14,7 +14,6 @@ public class LibraryManager {
         scanner = new Scanner(System.in);
     }
 
-    // method to display all books
     public void showBooks() {
         try {
             if (books == null) {
@@ -36,7 +35,6 @@ public class LibraryManager {
         }
     }
 
-    // method to add a book
     public void addBook() {
         try {
             System.out.print("\nEnter book title to add: ");
@@ -59,7 +57,6 @@ public class LibraryManager {
         }
     }
 
-    // method to remove a book
     public void removeBook() {
         try {
             if (books.isEmpty()) {

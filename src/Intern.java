@@ -11,7 +11,7 @@ public class Intern extends Employee {
 
     @Override
     public double calculateSalary() {
-        return baseSalary * 0.5; // interns earn 50% of base salary
+        return baseSalary * 0.5;
     }
 
     @Override

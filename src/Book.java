@@ -10,12 +10,10 @@ public class Book extends LibraryItem implements Borrowable {
         setGenre(genre);
     }
 
-    // Getters
     public String getIsbn() { return isbn; }
     public int getNumberOfPages() { return numberOfPages; }
     public String getGenre() { return genre; }
 
-    // Setters with validation
     public void setGenre(String genre) {
         if (genre == null || genre.trim().isEmpty()) {
             this.genre = "Unknown";
@@ -42,7 +40,6 @@ public class Book extends LibraryItem implements Borrowable {
         return daysLate * 0.50;
     }
 
-    // Borrowable methods
     @Override
     public void borrowItem(String borrowerName) {
         checkOut(borrowerName);

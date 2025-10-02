@@ -6,31 +6,23 @@ public class Magazine extends LibraryItem implements Borrowable {
     public Magazine(String itemId, String title, String author, int issueNumber, String publicationMonth, boolean isLatestIssue) {
         super(itemId, title, author);
         setIssueNumber(issueNumber);
-        this.publicationMonth = publicationMonth == null ? "Unknown" : publicationMonth;
+        this.publicationMonth = publicationMonth;
         this.isLatestIssue = isLatestIssue;
     }
 
-    public int getIssueNumber() {
-        return issueNumber;
-    }
+    // Getters
+    public int getIssueNumber() { return issueNumber; }
+    public String getPublicationMonth() { return publicationMonth; }
+    public boolean isLatestIssue() { return isLatestIssue; }
 
-    public String getPublicationMonth() {
-        return publicationMonth;
-    }
-
-    public boolean isLatestIssue() {
-        return isLatestIssue;
-    }
-
+    // Setters
     public void setLatestIssue(boolean latest) {
         this.isLatestIssue = latest;
     }
 
     public void setIssueNumber(int issue) {
-        if (issue <= 0) {
-            throw new IllegalArgumentException("Issue number must be positive");
-        }
-        this.issueNumber = issue;
+        if (issue <= 0) this.issueNumber = 1;
+        else this.issueNumber = issue;
     }
 
     @Override
@@ -40,10 +32,10 @@ public class Magazine extends LibraryItem implements Borrowable {
 
     @Override
     public double calculateLateFee(int daysLate) {
-        if (daysLate <= 0) return 0.0;
         return daysLate * 0.25;
     }
 
+    // Borrowable methods
     @Override
     public void borrowItem(String borrowerName) {
         checkOut(borrowerName);
@@ -61,12 +53,6 @@ public class Magazine extends LibraryItem implements Borrowable {
 
     @Override
     public int getBorrowingPeriod() {
-        return 7; // days
-    }
-
-    @Override
-    public String getItemInfo() {
-        return super.getItemInfo() + String.format(", Issue: %d, Month: %s, Latest: %s",
-                issueNumber, publicationMonth, isLatestIssue ? "Yes" : "No");
+        return 7;
     }
 }

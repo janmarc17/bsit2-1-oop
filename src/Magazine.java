@@ -10,12 +10,10 @@ public class Magazine extends LibraryItem implements Borrowable {
         this.isLatestIssue = isLatestIssue;
     }
 
-    // Getters
     public int getIssueNumber() { return issueNumber; }
     public String getPublicationMonth() { return publicationMonth; }
     public boolean isLatestIssue() { return isLatestIssue; }
 
-    // Setters
     public void setLatestIssue(boolean latest) {
         this.isLatestIssue = latest;
     }
@@ -35,7 +33,6 @@ public class Magazine extends LibraryItem implements Borrowable {
         return daysLate * 0.25;
     }
 
-    // Borrowable methods
     @Override
     public void borrowItem(String borrowerName) {
         checkOut(borrowerName);

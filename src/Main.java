@@ -2,7 +2,6 @@ public class LibrarySystem {
     public static void main(String[] args) {
         LibraryManager manager = new LibraryManager();
 
-        // Items
         Book book1 = new Book("B001", "Java Programming", "James Gosling", "ISBN-JAVA", 450, "Programming");
         Magazine mag1 = new Magazine("M001", "Tech Today", "Editor Smith", 12, "August", true);
         DVD dvd1 = new DVD("D001", "The Matrix", "Wachowski Sisters", 136, "R", "Sci-Fi");
@@ -11,7 +10,6 @@ public class LibrarySystem {
         manager.addItem(mag1);
         manager.addItem(dvd1);
 
-        // Users
         Student studentJohn = new Student("U001", "John Smith", "john@example.com", "S123", "Computer Science");
         Faculty drSmith = new Faculty("U002", "Dr. Smith", "drsmith@example.com", "Engineering", "Professor");
 

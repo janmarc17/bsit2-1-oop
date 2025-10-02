@@ -5,42 +5,31 @@ public class Book extends LibraryItem implements Borrowable {
 
     public Book(String itemId, String title, String author, String isbn, int numberOfPages, String genre) {
         super(itemId, title, author);
-        setIsbn(isbn);
+        this.isbn = isbn;
         setNumberOfPages(numberOfPages);
         setGenre(genre);
     }
 
-    private void setIsbn(String isbn) {
-        if (isbn == null || isbn.trim().isEmpty()) {
-            throw new IllegalArgumentException("ISBN cannot be null/empty");
+    // Getters
+    public String getIsbn() { return isbn; }
+    public int getNumberOfPages() { return numberOfPages; }
+    public String getGenre() { return genre; }
+
+    // Setters with validation
+    public void setGenre(String genre) {
+        if (genre == null || genre.trim().isEmpty()) {
+            this.genre = "Unknown";
+        } else {
+            this.genre = genre;
         }
-        this.isbn = isbn;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public int getNumberOfPages() {
-        return numberOfPages;
-    }
-
-    public String getGenre() {
-        return genre;
     }
 
     public void setNumberOfPages(int pages) {
         if (pages <= 0) {
-            throw new IllegalArgumentException("Number of pages must be positive");
+            this.numberOfPages = 1;
+        } else {
+            this.numberOfPages = pages;
         }
-        this.numberOfPages = pages;
-    }
-
-    public void setGenre(String genre) {
-        if (genre == null || genre.trim().isEmpty()) {
-            throw new IllegalArgumentException("Genre cannot be null or empty");
-        }
-        this.genre = genre;
     }
 
     @Override
@@ -50,10 +39,10 @@ public class Book extends LibraryItem implements Borrowable {
 
     @Override
     public double calculateLateFee(int daysLate) {
-        if (daysLate <= 0) return 0.0;
         return daysLate * 0.50;
     }
 
+    // Borrowable methods
     @Override
     public void borrowItem(String borrowerName) {
         checkOut(borrowerName);
@@ -71,11 +60,6 @@ public class Book extends LibraryItem implements Borrowable {
 
     @Override
     public int getBorrowingPeriod() {
-        return 14; // days
-    }
-
-    @Override
-    public String getItemInfo() {
-        return super.getItemInfo() + String.format(", ISBN: %s, Pages: %d, Genre: %s", isbn, numberOfPages, genre);
+        return 14;
     }
 }

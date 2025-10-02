@@ -1,5 +1,5 @@
 public class DVD extends LibraryItem implements Borrowable {
-    private int duration; // minutes
+    private int duration;
     private String rating;
     private String genre;
 
@@ -10,12 +10,10 @@ public class DVD extends LibraryItem implements Borrowable {
         this.genre = genre;
     }
 
-    // Getters
     public int getDuration() { return duration; }
     public String getRating() { return rating; }
     public String getGenre() { return genre; }
 
-    // Setters with validation
     public void setRating(String rating) {
         if (rating == null) rating = "G";
         rating = rating.toUpperCase();
@@ -41,7 +39,6 @@ public class DVD extends LibraryItem implements Borrowable {
         return daysLate * 1.00;
     }
 
-    // Borrowable methods
     @Override
     public void borrowItem(String borrowerName) {
         checkOut(borrowerName);

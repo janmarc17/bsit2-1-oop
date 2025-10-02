@@ -12,90 +12,45 @@ public class LibraryManager {
     }
 
     public void displayAllItems() {
-        System.out.println("All library items:");
         for (Borrowable b : items) {
-            if (b instanceof LibraryItem) {
-                LibraryItem li = (LibraryItem) b;
-                System.out.println(" - " + li.getItemInfo() + " | Borrowing status: " + b.getBorrowingStatus());
-            } else {
-                System.out.println(" - Unknown item (not a LibraryItem).");
-            }
+            LibraryItem li = (LibraryItem) b;
+            System.out.println(li.getItemType() + ": " + li.title + " (" + b.getBorrowingStatus() + ")");
         }
     }
 
-    public Borrowable findById(String itemId) {
+    public boolean borrowItem(String itemId, String borrowerName, User user) {
         for (Borrowable b : items) {
-            if (b instanceof LibraryItem) {
-                LibraryItem li = (LibraryItem) b;
-                if (li.getItemId().equals(itemId)) {
-                    return b;
+            LibraryItem li = (LibraryItem) b;
+            if (li.itemId.equals(itemId)) {
+                if (b.isAvailable() && user.getBorrowedItemsCount() < user.getMaxBorrowLimit()) {
+                    b.borrowItem(borrowerName);
+                    user.addBorrowedItem(li);
+                    return true;
                 }
+                return false;
             }
         }
-        return null;
+        return false;
     }
 
-    public boolean borrowItem(String itemId, String borrowerName) {
-        Borrowable b = findById(itemId);
-        if (b == null) {
-            System.out.println("No item with ID " + itemId + " found.");
-            return false;
+    public boolean returnItem(String itemId, User user) {
+        for (Borrowable b : items) {
+            LibraryItem li = (LibraryItem) b;
+            if (li.itemId.equals(itemId) && !b.isAvailable()) {
+                b.returnItem();
+                user.removeBorrowedItem(li);
+                return true;
+            }
         }
-        if (!b.isAvailable()) {
-            System.out.println("Item " + itemId + " is not available.");
-            return false;
-        }
-        try {
-            b.borrowItem(borrowerName);
-            System.out.println("Item " + itemId + " checked out to " + borrowerName + ".");
-            return true;
-        } catch (Exception e) {
-            System.out.println("Failed to borrow: " + e.getMessage());
-            return false;
-        }
-    }
-
-    public boolean returnItem(String itemId) {
-        Borrowable b = findById(itemId);
-        if (b == null) {
-            System.out.println("No item with ID " + itemId + " found.");
-            return false;
-        }
-        if (b.isAvailable()) {
-            System.out.println("Item " + itemId + " is not currently borrowed.");
-            return false;
-        }
-        try {
-            b.returnItem();
-            System.out.println("Item " + itemId + " returned and is now available.");
-            return true;
-        } catch (Exception e) {
-            System.out.println("Failed to return: " + e.getMessage());
-            return false;
-        }
+        return false;
     }
 
     public void displayAvailableItems() {
-        System.out.println("Available items:");
         for (Borrowable b : items) {
             if (b.isAvailable()) {
-                if (b instanceof LibraryItem) {
-                    System.out.println(" - " + ((LibraryItem) b).getItemInfo());
-                } else {
-                    System.out.println(" - Available: Unknown item type");
-                }
-            }
-        }
-    }
-
-    public double calculateTotalLateFees(int daysLate) {
-        double total = 0.0;
-        for (Borrowable b : items) {
-            if (b instanceof LibraryItem) {
                 LibraryItem li = (LibraryItem) b;
-                total += li.calculateLateFee(daysLate);
+                System.out.println(li.getItemType() + ": " + li.title + " (" + b.getBorrowingStatus() + ")");
             }
         }
-        return total;
     }
 }

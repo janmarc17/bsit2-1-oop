@@ -8,13 +8,8 @@ public class Faculty extends User {
         this.position = position;
     }
 
-    public String getDepartment() {
-        return department;
-    }
-
-    public String getPosition() {
-        return position;
-    }
+    public String getDepartment() { return department; }
+    public String getPosition() { return position; }
 
     @Override
     public int getMaxBorrowLimit() {
